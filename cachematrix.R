@@ -1,8 +1,12 @@
 
-# make Matrix Function 
+# Create a special "matrix" object that can cache its inverse
+# and get the inverse from the cache if its already cached for
+# same matrix.
+
+# Make Matrix Function, and initialize variables 
 makeCacheMatrix <- function(x = matrix()) {
     inv_matrix <- NULL
-    #set matrix value, and reset inverse
+    #set matrix value, and reset inverse when set new matrix
     set <- function(y) {
         x <<- y
         inv_matrix <<- NULL
@@ -19,6 +23,7 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 # get inverse and cache 
+# or compute the inverse and cache it 
 cacheSolve <- function(x, ...) {
     # get cached inverse 
     inv <- x$getinverse()
@@ -29,7 +34,7 @@ cacheSolve <- function(x, ...) {
     }
     # if inverse not cached, calculate it and cache it
     data <- x$get()
-    inv <- solve(data)
+    inv <- solve(data, ...)
     x$setinverse(inv)
     inv
 }
